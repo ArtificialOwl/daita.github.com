@@ -1,0 +1,73 @@
+# Site settings
+title: Maxence Lange - Open Source Developer
+description: "ArtificialOwl"
+baseurl: "" # for test: remove string '/space-jekyll-template' to ''
+url: "https://daita.github.io/" # for test: remove string 'http://victorvoid.github.io' to '' but in production: 'https://yourusername.githu.io'
+
+# User settings
+username: Cult
+user_title: Artificial Owl
+email: maxence@artificial-owl.com
+twitter_username: AnArtificialOwl
+github_username: daita
+#gplus_username:  loremipsum
+#linkedin_public_url: loremipsum # Example: For public profile 'www.linkedin.com/in/john-smith', 'john-smith' is your linkedin_public_url
+disqus_username: loremipsum
+profile_picture: https://daita.github.io/owl512.png
+
+# Build settings
+markdown: kramdown
+highlighter: rouge
+permalink: /:title/
+
+# html minify
+compress_html:
+  clippings: all
+  comments: all
+  endings: []
+  profile: false
+
+# Links to include in menu navigation
+links:
+  section_1:
+    - title: home
+      url: /
+      key_trigger: 1
+    - title: my posts
+      url: /posts
+      key_trigger: 2
+    - title: series
+      url: /series
+      key_trigger: 3
+    - title: tags
+      url: /tags
+      key_trigger: 4
+    - title: about me
+      url: /about
+      key_trigger: 5
+  section_2:
+    - title: github
+      url: http://www.github.com/daita
+      new_tab: true
+      key_trigger: g
+    - title: twitter
+      url: http://www.twitter.com/AnArtificialOwl
+      key_trigger: t
+    - title: search
+      url: ""
+      key_trigger: s #WARNING: search only works with "s"
+
+# projects in header index
+projects:
+  - name: Nextcloud Social
+    url: https://github.com/nextcloud/social
+  - name: Nextcloud Full Text Search
+    url: https://github.com/nextcloud/fulltextsearch
+  - name: Nextcloud Circles
+    url: https://github.com/nextcloud/circles
+  - name: Files From Mail
+    url: https://github.com/daita/files_frommail
+
+
+# exclude my node related stuff
+exclude: ['package.json', 'src', 'node_modules']

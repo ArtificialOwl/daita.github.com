@@ -1,0 +1,18 @@
+---
+layout: minimal
+title: "About me"
+permalink: /about/
+description: "Some description about Cult"
+---
+
+<img itemprop="image" class="img-rounded about_perfil" src="https://daita.github.io/owl512.png" alt="Artificial Owl">
+
+<h2>My projects</h2>
+
+<div class="aboutme">
+	<ul class="recent">
+		{% for project in site.projects %}
+	    	<li><a href="{{ project.url}}"><h3 class="project-name" itemprop="name">{{ project.name }}</h3></a></li>
+	    {% endfor %}
+	</ul>
+</div>
