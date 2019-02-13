@@ -22,7 +22,7 @@
                 <!--<svg class="icon icon-google-plus"><use xlink:href="#icon-google-plus"></use></svg>-->
             <!--</a>-->
 
-            <a aria-label="My Github" title="Show my projects" target="_blank" href="https://github.com/{{site.github_username}}">
+            <a aria-label="My Github" title="Have a look to my work" target="_blank" href="https://github.com/{{site.github_username}}">
                 <svg class="icon icon-github-alt"><use xlink:href="#icon-github-alt"></use></svg>
             </a>
 
@@ -37,7 +37,7 @@
 
         <ul class="recent">
             <p>Recent posts:</p>
-             {% for post in site.posts limit:3%}
+             {% for post in site.posts limit:5 %}
                 <li>
                     <a title="Will take a my recent post" href="{{ post.url | prepend: site.baseurl }}">
                         <h2 class="post-title" itemprop="name">{{ post.title }}</h2>
@@ -47,14 +47,16 @@
         </ul>
 
         <ul class="recent">
-            <p>Recent projects:</p>
-             {% for project in site.projects limit:3%}
-                <li>
-                    <a title="Show my recent project" href="{{ project.url}}">
-                        <h2 class="post-title" itemprop="name">{{ project.name }}</h2>
-                    </a>
-                </li>
-              {% endfor %}
+			<p>Currently working on:</p>
+			{% for project in site.projects %}
+			{% if project.wip == true %}
+			<li>
+				<a title="Show my recent work" href="{{ project.url }}">
+					<h2 class="post-title" itemprop="name">{{ project.name }}</h2>
+				</a>
+			</li>
+			{% endif %}
+			{% endfor %}
         </ul>
 
     </div>

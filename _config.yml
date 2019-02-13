@@ -61,10 +61,13 @@ links:
 projects:
   - name: Nextcloud Social
     url: https://github.com/nextcloud/social
+    wip: true
   - name: Nextcloud Full Text Search
     url: https://github.com/nextcloud/fulltextsearch
+    wip: true
   - name: Nextcloud Circles
     url: https://github.com/nextcloud/circles
+    wip: true
   - name: Files From Mail
     url: https://github.com/daita/files_frommail
 
