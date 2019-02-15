@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>how I implemented FullTextSearch in the Deck app</title>
+    <title>How I implemented FullTextSearch in the Deck app</title>
 
     <meta name="description" content="">
 
@@ -15,7 +15,7 @@
     <!-- Social Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@AnArtificialOwl">
-    <meta name="twitter:title" content="how I implemented FullTextSearch in the Deck app">
+    <meta name="twitter:title" content="How I implemented FullTextSearch in the Deck app">
     <meta name="twitter:description" content="">
 
     
@@ -24,7 +24,7 @@
 
     <!-- Social Facebook/Open Graph -->
     <meta property="og:url" content="https://daita.github.io//fulltextsearch-and-deck/">
-    <meta property="og:title" content="how I implemented FullTextSearch in the Deck app">
+    <meta property="og:title" content="How I implemented FullTextSearch in the Deck app">
     
     <meta property="og:image" content="https://daita.github.io/">
     
@@ -32,7 +32,7 @@
     <meta property="og:site_name" content="Maxence Lange - Open Source Developer">
 
     <!-- Social Google+/Schema.org  -->
-    <meta itemprop="name" content="how I implemented FullTextSearch in the Deck app"/>
+    <meta itemprop="name" content="How I implemented FullTextSearch in the Deck app"/>
     <meta itemprop="description" content="">
     <meta itemprop="image" content="https://daita.github.io//assets/img/blog-image.png"/>
 
@@ -222,7 +222,7 @@
     <article role="article" class="post-item" itemscope="itemscope" itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
         <div class="content">
             <a title="Open the post" href="/fulltextsearch-and-deck/">
-                <h2 class="post-title" itemprop="name">how-I-implemented-FullTextSearch-in-the-Deck-app.md</h2>
+                <h2 class="post-title" itemprop="name">How-I-implemented-FullTextSearch-in-the-Deck-app.md</h2>
             </a>
         </div>
     </article>
@@ -234,13 +234,236 @@
         <section class="post" itemscope itemtype="http://schema.org/BlogPosting">
             
                 <div class="time">
-                    <time itemprop="datePublished" datetime="2019-02-13 11:42:31 -0100">13 Feb 2019</time>
+                    <time itemprop="datePublished" datetime="2019-02-15 07:57:12 -0100">15 Feb 2019</time>
                 </div>
             
-            <h1 class="post-title" itemprop="name">how I implemented FullTextSearch in the Deck app</h1>
+            <h1 class="post-title" itemprop="name">How I implemented FullTextSearch in the Deck app</h1>
 
             <article role="article" id="scroll" class="post-content" itemprop="articleBody">
-                
+                <figure>
+	<img src="/assets/img/fulltextsearch/deck-app-3a658fdfc259.png" alt="" />
+	<figcaption><p>Implementation of FullTextSearch in the Deck app; or is it the other way around ?</p></figcaption>
+</figure>
+
+<h2 id="the-deck-app">the Deck app</h2>
+
+<p><a href="https://apps.nextcloud.com/apps/deck">Deck</a> is an app for <strong>Nextcloud</strong> to help project management and personal planning made by <strong>Julius Härtl</strong>.</p>
+
+<p>For this implementation, I will only use some features of the app related to the tasks organization:</p>
+
+<ul>
+  <li>Tasks are defined in <em>Cards</em> and belongs to a <em>Board</em>,</li>
+  <li>Boards can be shared,</li>
+  <li>Cards are classified/ordered in <em>Stacks</em>.</li>
+  <li>Cards have some content we want to index.</li>
+</ul>
+
+<figure>
+	<img src="/assets/img/fulltextsearch/deck-app-4ad899ed889.png" alt="" />
+	<figcaption><p>Draging your task between Stacks in the Deck app.</p></figcaption>
+</figure>
+
+<h2 id="the-pull-request">the Pull Request</h2>
+
+<p><strong>FullTextSearch</strong> allows any app in Nextcloud to index content and search within this index.  <br />
+The communication between Deck and FullTextSearch is made using the <a href="https://github.com/nextcloud/server/blob/master/lib/public/FullTextSearch/IFullTextSearchProvider.php">Content Provider interface</a> available in Nextcloud since 15.0.0**.</p>
+
+<p>Let’s see the process to turn the Deck app into a <strong>Content Provider</strong> for FullTextSearch.</p>
+
+<p><a href="https://github.com/nextcloud/deck/pull/885">Link to the PR</a></p>
+
+<p>I will dissect the Pull Request I made for the Deck app that:</p>
+
+<ul>
+  <li>Generate (and catch) events so we know when a Board/Stack/Card is created, edited or deleted</li>
+  <li>Retrieve all content available per user,</li>
+  <li>Retrieve the content of one specific item,</li>
+  <li>Retrieve the sharing rights on Boards.</li>
+</ul>
+
+<h2 id="events">Events</h2>
+
+<p>Because FullTextSearch is not necessarily installed on any random instance of Nextcloud, I did not wanted to have direct call between the Deck app and FullTextSearch.
+The cleanest approach is to make the Deck app broadcasting events that will be catch and processed if FullTextSearch is installed and configured on the Nextcloud.</p>
+
+<p><em>Boards</em>, <em>Stacks</em> and <em>Cards</em> are managed in 3 distinct file: <strong>BoardService</strong>, <strong>StackService</strong> and <strong>CardService</strong>. The original source code is really clean and adding those broadcasts of events was easy.</p>
+
+<p><a href="https://github.com/nextcloud/deck/pull/885/commits/867bb939061bf803b42568720d60c951be663fca">Link to the commit</a></p>
+
+<p>As an example, this is how I added an <em>event broadcast</em> when a user create a new <em>Card</em> in <em>CardService::create()</em>:</p>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">eventDispatcher</span><span class="o">-&gt;</span><span class="na">dispatch</span><span class="p">(</span>
+	<span class="s1">'\OCA\Deck\Card::onCreate'</span><span class="p">,</span>
+	<span class="k">new</span> <span class="nx">GenericEvent</span><span class="p">(</span>
+    	<span class="kc">null</span><span class="p">,</span> 
+    	<span class="p">[</span>
+    		<span class="s1">'id'</span> <span class="o">=&gt;</span> <span class="nv">$card</span><span class="o">-&gt;</span><span class="na">getId</span><span class="p">(),</span> 
+    		<span class="s1">'card'</span> <span class="o">=&gt;</span> <span class="nv">$card</span><span class="p">,</span> 
+    		<span class="s1">'userId'</span> <span class="o">=&gt;</span> <span class="nv">$owner</span><span class="p">,</span> 
+    		<span class="s1">'stackId'</span> <span class="o">=&gt;</span> <span class="nv">$stackId</span>
+    	<span class="p">]</span>
+    <span class="p">)</span>
+<span class="p">);</span></code></pre></figure>
+
+<p>Then, I needed to add <strong>Listeners</strong> to catch those events at the loading of the app:</p>
+
+<p><a href="https://github.com/nextcloud/deck/pull/885/commits/7c6308ec683cbd0b4478e2d5ba30acefd96e9551#diff-b8a11151e44bcffc222c5fddc9ab92c9R159">Link to the commit</a></p>
+
+<p>Please note that I only listen to events I really needs:</p>
+
+<ul>
+  <li>Card creation,</li>
+  <li>Card modification,</li>
+  <li>Card deletion,</li>
+  <li>New share on a Board,</li>
+  <li>Share modification on a Board,</li>
+  <li>Share deletion on a Board.</li>
+</ul>
+
+<p>As an example, this is how I detect that a Card is created by a user:</p>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="nv">$eventDispatcher</span><span class="o">-&gt;</span><span class="na">addListener</span><span class="p">(</span>
+	<span class="s1">'\OCA\Deck\Card::onCreate'</span><span class="p">,</span> <span class="k">function</span><span class="p">(</span><span class="nx">GenericEvent</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">fullTextSearchService</span><span class="o">-&gt;</span><span class="na">onCardCreated</span><span class="p">(</span><span class="nv">$e</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="p">);</span></code></pre></figure>
+
+<h2 id="content-provider">Content Provider</h2>
+
+<p>The content provider is a PHP class that implements the <code class="highlighter-rouge">OCP\FullTextSearch\IFullTextSearchProvider</code> interface from Nextcloud. 
+This class will contains methods that are called by FullTextSearch to manage the content from the Deck app.</p>
+
+<p><a href="https://github.com/nextcloud/deck/blob/efc57aa37d08eb02ec743d31cc2908add06e3a31/lib/Provider/DeckProvider.php">Link to DeckProvider.php</a></p>
+
+<p>The class will be defined in <code class="highlighter-rouge">appinfo/info.xml</code>, so that FullTextSearch is aware of its existence:</p>
+
+<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="nt">&lt;fulltextsearch&gt;</span>
+	<span class="nt">&lt;provider&gt;</span>OCA\Deck\Provider\DeckProvider<span class="nt">&lt;/provider&gt;</span>
+<span class="nt">&lt;/fulltextsearch&gt;</span></code></pre></figure>
+
+<p>The defined class will be used to:</p>
+
+<ul>
+  <li>identify the content provider,</li>
+  <li>get documents related to a user,</li>
+  <li>get document by its Id,</li>
+  <li>improve search request,</li>
+  <li>improve search result.</li>
+</ul>
+
+<p><a href="https://github.com/nextcloud/fulltextsearch/wiki/How-FullTextSearch-indexes-your-cloud">Link to some documentation for FullTextSearch</a></p>
+
+<p><em>Note: we are calling <strong>document</strong> any distinct entry in our index, identified by an <code class="highlighter-rouge">id</code> (string). A document contains meta data (owner, sharing rights, title, link, …) and content. In the case of the Deck app, we are generating a document for each card.</em></p>
+
+<h2 id="first-index">First index</h2>
+
+<p>If you already used FullTextSearch, you know that the first step after the configuration of the FullTextSearch app (and the testing using <code class="highlighter-rouge">./occ fulltextsearch:test</code>) is to start a complete index of your Nextcloud using the <code class="highlighter-rouge">./occ fulltextsearch:index</code> command.</p>
+
+<p>During this process, FullTextSearch calls the method <code class="highlighter-rouge">generateIndexableDocuments()</code> from each <em>Content Provider</em> installed on Nextcloud, for each user.
+Each content provider needs to returns the full list of documents (as an array of <a href="https://github.com/nextcloud/server/blob/master/lib/public/FullTextSearch/Model/IndexDocument.php">IndexDocument</a>) for that user, with only the bare minimum of data.</p>
+
+<p>In our DeckProvider class, we get the list of <code class="highlighter-rouge">id</code> of all <em>Cards</em> available to the requested user and we generate an IndexDocument for each entry with only the <code class="highlighter-rouge">id</code> of the card</p>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="sd">/**
+ * @param string $userId
+ *
+ * @return IndexDocument[]
+ */</span>
+<span class="k">public</span> <span class="k">function</span> <span class="nf">generateIndexableDocuments</span><span class="p">(</span><span class="nx">string</span> <span class="nv">$userId</span><span class="p">)</span><span class="o">:</span> <span class="k">array</span> <span class="p">{</span>
+	<span class="nv">$cards</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">fullTextSearchService</span><span class="o">-&gt;</span><span class="na">getCardsFromUser</span><span class="p">(</span><span class="nv">$userId</span><span class="p">);</span>
+	
+	<span class="nv">$documents</span> <span class="o">=</span> <span class="p">[];</span>
+	<span class="k">foreach</span> <span class="p">(</span><span class="nv">$cards</span> <span class="k">as</span> <span class="nv">$card</span><span class="p">)</span> <span class="p">{</span>
+		<span class="nv">$documents</span><span class="p">[]</span> <span class="o">=</span>
+			<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">fullTextSearchService</span><span class="o">-&gt;</span><span class="na">generateIndexDocumentFromCard</span><span class="p">(</span><span class="nv">$card</span><span class="p">);</span>
+	<span class="p">}</span>
+	
+	<span class="k">return</span> <span class="nv">$documents</span><span class="p">;</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>We only fill the IndexDocument with the <code class="highlighter-rouge">id</code> of the <em>Cards</em> to keep it light. 
+No content should be added right now, as FullTextSearch will come back during the indexing process by calling the method <code class="highlighter-rouge">fillIndexDocument()</code> of the DeckProvider class for each IndexDocument from the list we returned earlier.</p>
+
+<p>During this call, we complete the IndexDocument by adding the description of the Card, its title and the Access right to the Board that contains the Card.</p>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="sd">/**
+ * @param IndexDocument $document
+ *
+ * @throws DoesNotExistException
+ * @throws MultipleObjectsReturnedException
+ */</span>
+<span class="k">public</span> <span class="k">function</span> <span class="nf">fillIndexDocument</span><span class="p">(</span><span class="nx">IndexDocument</span> <span class="nv">$document</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">try</span> <span class="p">{</span>
+		<span class="sd">/** @var Card $card */</span>
+		<span class="nv">$card</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">cardMapper</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">((</span><span class="nx">int</span><span class="p">)</span><span class="nv">$document</span><span class="o">-&gt;</span><span class="na">getId</span><span class="p">());</span>
+	<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">DoesNotExistException</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+	<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">MultipleObjectsReturnedException</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+	<span class="p">}</span>
+	<span class="nv">$document</span><span class="o">-&gt;</span><span class="na">setTitle</span><span class="p">(</span><span class="nv">$card</span><span class="o">-&gt;</span><span class="na">getTitle</span><span class="p">());</span>
+	<span class="nv">$document</span><span class="o">-&gt;</span><span class="na">setContent</span><span class="p">(</span><span class="nv">$card</span><span class="o">-&gt;</span><span class="na">getDescription</span><span class="p">());</span>
+	<span class="nv">$document</span><span class="o">-&gt;</span><span class="na">setAccess</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">generateDocumentAccessFromCardId</span><span class="p">(</span><span class="nv">$card</span><span class="o">-&gt;</span><span class="na">getId</span><span class="p">()));</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>From a <em>Card</em>, we now have an <em>IndexDocument</em> that contains all data needed for a proper index.<br />
+The next step of the indexing process initiated by FullTextSearch is to send this <em>IndexDocument</em> to ElasticSearch before processing the next IndexDocument from the list.</p>
+
+<h2 id="updating-the-index">Updating the index</h2>
+
+<p>Now that we indexed all the content we wanted from the Deck app, we also want to keep the index up-to-date. 
+Updating the index is a process split in 2 steps:</p>
+
+<ul>
+  <li>Telling FullTextSearch that a document have been created/edited/deleted,</li>
+  <li>Providing the new data when FullTextSearch request them.</li>
+</ul>
+
+<h3 id="first-step-update-index-status">First step: update index status</h3>
+
+<p>Earlier, we added listeners to catch events when new data are available and when shares are edited.<br />
+In the case of a <em>Card</em> have been edited, we will tell FullTextSearch that the document needs to be updated.</p>
+
+<p><a href="https://github.com/nextcloud/deck/blob/efc57aa37d08eb02ec743d31cc2908add06e3a31/lib/Service/FullTextSearchService.php#L105-L111">Link to the code</a></p>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="sd">/**
+ * @param GenericEvent $e
+ */</span>
+<span class="k">public</span> <span class="k">function</span> <span class="nf">onCardUpdated</span><span class="p">(</span><span class="nx">GenericEvent</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+	<span class="nv">$cardId</span> <span class="o">=</span> <span class="nv">$e</span><span class="o">-&gt;</span><span class="na">getArgument</span><span class="p">(</span><span class="s1">'id'</span><span class="p">);</span>
+	<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">fullTextSearchManager</span><span class="o">-&gt;</span><span class="na">updateIndexStatus</span><span class="p">(</span>
+		<span class="nx">DeckProvider</span><span class="o">::</span><span class="na">DECK_PROVIDER_ID</span><span class="p">,</span> <span class="p">(</span><span class="nx">string</span><span class="p">)</span><span class="nv">$cardId</span><span class="p">,</span> <span class="nx">IIndex</span><span class="o">::</span><span class="na">INDEX_CONTENT</span>
+	<span class="p">);</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>This way, after a card is updated in Deck, FullTextSearch knows that some content needs to be updated in the index.</p>
+
+<h3 id="second-step-provide-data-based-on-document-id">Second step: provide data based on document id</h3>
+
+<p>FullTextSearch is now fully aware that a document needs to be re-indexed but have no idea of the new content.<br />
+At the next background job, FullTextSearch will request Deck to generate a new <em>IndexDocument</em> based on the id of the <em>Card</em> throw the call of the <code class="highlighter-rouge">updateDocument()</code> on the Content Provider class (DeckProvider.php):</p>
+
+<p><a href="https://github.com/nextcloud/deck/blob/efc57aa37d08eb02ec743d31cc2908add06e3a31/lib/Provider/DeckProvider.php#L195-L200">Link to the code</a></p>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="sd">/**
+ * @param IIndex $index
+ *
+ * @return IndexDocument
+ * @throws DoesNotExistException
+ * @throws MultipleObjectsReturnedException
+ */</span>
+<span class="k">public</span> <span class="k">function</span> <span class="nf">updateDocument</span><span class="p">(</span><span class="nx">IIndex</span> <span class="nv">$index</span><span class="p">)</span><span class="o">:</span> <span class="nx">IndexDocument</span> <span class="p">{</span>
+	<span class="nv">$document</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">IndexDocument</span><span class="p">(</span><span class="nx">DeckProvider</span><span class="o">::</span><span class="na">DECK_PROVIDER_ID</span><span class="p">,</span> <span class="nv">$index</span><span class="o">-&gt;</span><span class="na">getDocumentId</span><span class="p">());</span>
+	<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">fullTextSearchService</span><span class="o">-&gt;</span><span class="na">fillIndexDocument</span><span class="p">(</span><span class="nv">$document</span><span class="p">);</span>
+	
+	<span class="k">return</span> <span class="nv">$document</span><span class="p">;</span>
+<span class="p">}</span></code></pre></figure>
+
+<p>The returned document contains the new data that will be sent to ElasticSearch and our index will be up-to-date.</p>
+
+<h2 id="search-result">Search result</h2>
+
+<p>This PR does not include the catch of the search from the searchbar nor the displays of the result within the Deck app, 
+but we now have a <strong>Deck</strong> entry in the FullTextSearch navigation page.</p>
+
 
             </article>
 
@@ -248,7 +471,7 @@
 
     <h3>Share</h3>
 
-    <a aria-label="Share on Twitter" href="https://twitter.com/intent/tweet?text=&quot;&quot;%20https://daita.github.io//fulltextsearch-and-deck/%20via%20&#64;AnArtificialOwl&hashtags=fulltextsearch,nextcloud,"
+    <a aria-label="Share on Twitter" href="https://twitter.com/intent/tweet?text=&quot;&quot;%20https://daita.github.io//fulltextsearch-and-deck/%20via%20&#64;AnArtificialOwl&hashtags=php,nextcloud,fulltextsearch,deck,"
     onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;" title="Share on Twitter">
         <svg class="icon icon-twitter"><use xlink:href="#icon-twitter"></use></svg>
     </a>

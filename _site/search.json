@@ -1,11 +1,11 @@
 [
   
     {
-      "title"    : "how I implemented FullTextSearch in the Deck app",
-      "category" : "Full Text Search",
-      "tags"     : "fulltextsearch and nextcloud",
+      "title"    : "How I implemented FullTextSearch in the Deck app",
+      "category" : "Nextcloud FullTextSearch",
+      "tags"     : "php, nextcloud, fulltextsearch, and deck",
       "url"      : "/fulltextsearch-and-deck/",
-      "date"     : "13 Feb 2019"
+      "date"     : "15 Feb 2019"
     } 
   
 ]
