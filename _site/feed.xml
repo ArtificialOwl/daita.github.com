@@ -5,13 +5,13 @@
     <description>ArtificialOwl</description>
     <link>https://daita.github.io//</link>
     <atom:link href="https://daita.github.io//feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 15 Feb 2019 09:09:15 -0100</pubDate>
-    <lastBuildDate>Fri, 15 Feb 2019 09:09:15 -0100</lastBuildDate>
+    <pubDate>Sat, 16 Feb 2019 10:31:43 -0100</pubDate>
+    <lastBuildDate>Sat, 16 Feb 2019 10:31:43 -0100</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
     
       <item>
         <title>How I implemented FullTextSearch in the Deck app</title>
-        <description>&lt;figure&gt; &lt;img src=&quot;/assets/img/fulltextsearch/deck-app-3a658fdfc259.png&quot; alt=&quot;&quot; /&gt; &lt;figcaption&gt;&lt;p&gt;Implementation of FullTextSearch in the Deck app; or is it the other way around ?&lt;/p&gt;&lt;/figcaption&gt; &lt;/figure&gt; &lt;h2 id=&quot;the-deck-app&quot;&gt;the Deck app&lt;/h2&gt; &lt;p&gt;&lt;a href=&quot;https://apps.nextcloud.com/apps/deck&quot;&gt;Deck&lt;/a&gt; is an app for &lt;strong&gt;Nextcloud&lt;/strong&gt; to help project management and personal planning made by &lt;strong&gt;Julius Härtl&lt;/strong&gt;.&lt;/p&gt; &lt;p&gt;For this implementation, I will only use some features of the app related to the tasks organization:&lt;/p&gt; &lt;ul&gt; &lt;li&gt;Tasks are defined in &lt;em&gt;Cards&lt;/em&gt; and belongs to a &lt;em&gt;Board&lt;/em&gt;,&lt;/li&gt; &lt;li&gt;Boards can be shared,&lt;/li&gt; &lt;li&gt;Cards are classified/ordered in &lt;em&gt;Stacks&lt;/em&gt;.&lt;/li&gt; &lt;li&gt;Cards have some content we want to index.&lt;/li&gt; &lt;/ul&gt; &lt;figure&gt; &lt;img src=&quot;/assets/img/fulltextsearch/deck-app-4ad899ed889.png&quot; alt=&quot;&quot; /&gt; &lt;figcaption&gt;&lt;p&gt;Draging your task between Stacks in...</description>
+        <description>&lt;p&gt;&lt;em&gt;this post is a devblog aiming to help anyone willing to implement FullTextSearch in a 3rd party app.&lt;/em&gt;&lt;/p&gt; &lt;figure&gt; &lt;img src=&quot;/assets/img/fulltextsearch/deck-app-3a658fdfc259.png&quot; alt=&quot;&quot; /&gt; &lt;figcaption&gt;&lt;p&gt;Implementation of FullTextSearch in the Deck app; or is it the other way around ?&lt;/p&gt;&lt;/figcaption&gt; &lt;/figure&gt; &lt;h2 id=&quot;the-deck-app&quot;&gt;the Deck app&lt;/h2&gt; &lt;p&gt;&lt;a href=&quot;https://apps.nextcloud.com/apps/deck&quot;&gt;Deck&lt;/a&gt; is an app for &lt;strong&gt;Nextcloud&lt;/strong&gt; to help project management and personal planning made by &lt;strong&gt;Julius Härtl&lt;/strong&gt;.&lt;/p&gt; &lt;p&gt;For this implementation, I will only use some features of the app related to the tasks organization:&lt;/p&gt; &lt;ul&gt; &lt;li&gt;Tasks are defined in &lt;em&gt;Cards&lt;/em&gt; and belongs to a &lt;em&gt;Board&lt;/em&gt;,&lt;/li&gt; &lt;li&gt;Boards can be shared,&lt;/li&gt; &lt;li&gt;Cards are classified/ordered in &lt;em&gt;Stacks&lt;/em&gt;.&lt;/li&gt; &lt;li&gt;Cards have...</description>
         <pubDate>Fri, 15 Feb 2019 07:57:12 -0100</pubDate>
         <link>https://daita.github.io//fulltextsearch-and-deck/</link>
         <guid isPermaLink="true">https://daita.github.io//fulltextsearch-and-deck/</guid>

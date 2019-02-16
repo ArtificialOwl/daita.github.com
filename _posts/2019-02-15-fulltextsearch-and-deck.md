@@ -13,6 +13,9 @@ categories:
 - Nextcloud FullTextSearch 
 ---
 
+_this post is a devblog aiming to help anyone willing to implement FullTextSearch in a 3rd party app._
+
+ 
 <figure>
 	<img src="{{"/assets/img/fulltextsearch/deck-app-3a658fdfc259.png"}}" alt="">
 	<figcaption><p>Implementation of FullTextSearch in the Deck app; or is it the other way around ?</p></figcaption>
@@ -199,7 +202,7 @@ public function fillIndexDocument(IndexDocument $document) {
 {% endhighlight %}  
 
 From a _Card_, we now have an _IndexDocument_ that contains all data needed for a proper index.  
-The next step of the indexing process initiated by FullTextSearch is to send this _IndexDocument_ to ElasticSearch before processing the next IndexDocument from the list.
+The next step of the indexing process initiated by FullTextSearch is to send this _IndexDocument_ to **FullTextSearch_ElasticSearch** before processing the next IndexDocument from the list.
 
 
 
@@ -261,7 +264,7 @@ public function updateDocument(IIndex $index): IndexDocument {
 {% endhighlight %}  
 
 
-The returned document contains the new data that will be sent to ElasticSearch and our index will be up-to-date.
+The returned document contains the new data that will be sent to FullTextSearch_ElasticSearch and our index will be up-to-date.
 
 
 
@@ -270,4 +273,47 @@ The returned document contains the new data that will be sent to ElasticSearch a
 
 This PR does not include the catch of the search from the searchbar nor the displays of the result within the Deck app, 
 but we now have a **Deck** entry in the FullTextSearch navigation page.
+
+However, we can still improve the search result; when a user initiate a search using FullTextSearch, the results returned by 
+FullTextSearch_ElasticSearch are stored in an [ISearchResult](https://github.com/nextcloud/server/blob/master/lib/public/FullTextSearch/Model/ISearchResult.php) object as a array of _IndexDocument_.   
+
+Each document in the list contains: 
+
+- the id of the document itself,
+- extracts from the indexed text that fit the search.
+
+The generated _ISearchResult_ is sent to our Content Provider throw the `improveSearchResult` method, so we can feed it with more data, like a link to the right item. 
+
+[Link to the code](https://github.com/nextcloud/deck/blob/efc57aa37d08eb02ec743d31cc2908add06e3a31/lib/Provider/DeckProvider.php#L238-L249)
+
+
+{% highlight php %}
+/**
+ * after a search, improve results
+ *
+ * @param ISearchResult $searchResult
+ */
+public function improveSearchResult(ISearchResult $searchResult) {
+	foreach ($searchResult->getDocuments() as $document) {
+		try {
+			$board =
+				$this->fullTextSearchService->getBoardFromCardId((int)$document->getId());
+				
+			$path = '#!/board/' . $board->getId() . '//card/' . $document->getId();
+			$document->setLink($this->urlGenerator->linkToRoute('deck.page.index') . $path);
+		} catch (DoesNotExistException $e) {
+		} catch (MultipleObjectsReturnedException $e) {
+		}
+	}
+}
+{% endhighlight %}
+
+
+<figure>
+	<img src="{{"/assets/img/fulltextsearch/deck-app-92dd28f1ea0.gif"}}" alt="">
+	<figcaption><p>Clicking on the displayed result will open the related _Card_.</p></figcaption>
+</figure>
+
+
+
 

@@ -240,7 +240,9 @@
             <h1 class="post-title" itemprop="name">How I implemented FullTextSearch in the Deck app</h1>
 
             <article role="article" id="scroll" class="post-content" itemprop="articleBody">
-                <figure>
+                <p><em>this post is a devblog aiming to help anyone willing to implement FullTextSearch in a 3rd party app.</em></p>
+
+<figure>
 	<img src="/assets/img/fulltextsearch/deck-app-3a658fdfc259.png" alt="" />
 	<figcaption><p>Implementation of FullTextSearch in the Deck app; or is it the other way around ?</p></figcaption>
 </figure>
@@ -405,7 +407,7 @@ No content should be added right now, as FullTextSearch will come back during th
 <span class="p">}</span></code></pre></figure>
 
 <p>From a <em>Card</em>, we now have an <em>IndexDocument</em> that contains all data needed for a proper index.<br />
-The next step of the indexing process initiated by FullTextSearch is to send this <em>IndexDocument</em> to ElasticSearch before processing the next IndexDocument from the list.</p>
+The next step of the indexing process initiated by FullTextSearch is to send this <em>IndexDocument</em> to <strong>FullTextSearch_ElasticSearch</strong> before processing the next IndexDocument from the list.</p>
 
 <h2 id="updating-the-index">Updating the index</h2>
 
@@ -457,12 +459,50 @@ At the next background job, FullTextSearch will request Deck to generate a new <
 	<span class="k">return</span> <span class="nv">$document</span><span class="p">;</span>
 <span class="p">}</span></code></pre></figure>
 
-<p>The returned document contains the new data that will be sent to ElasticSearch and our index will be up-to-date.</p>
+<p>The returned document contains the new data that will be sent to FullTextSearch_ElasticSearch and our index will be up-to-date.</p>
 
 <h2 id="search-result">Search result</h2>
 
 <p>This PR does not include the catch of the search from the searchbar nor the displays of the result within the Deck app, 
 but we now have a <strong>Deck</strong> entry in the FullTextSearch navigation page.</p>
+
+<p>However, we can still improve the search result; when a user initiate a search using FullTextSearch, the results returned by 
+FullTextSearch_ElasticSearch are stored in an <a href="https://github.com/nextcloud/server/blob/master/lib/public/FullTextSearch/Model/ISearchResult.php">ISearchResult</a> object as a array of <em>IndexDocument</em>.</p>
+
+<p>Each document in the list contains:</p>
+
+<ul>
+  <li>the id of the document itself,</li>
+  <li>extracts from the indexed text that fit the search.</li>
+</ul>
+
+<p>The generated <em>ISearchResult</em> is sent to our Content Provider throw the <code class="highlighter-rouge">improveSearchResult</code> method, so we can feed it with more data, like a link to the right item.</p>
+
+<p><a href="https://github.com/nextcloud/deck/blob/efc57aa37d08eb02ec743d31cc2908add06e3a31/lib/Provider/DeckProvider.php#L238-L249">Link to the code</a></p>
+
+<figure class="highlight"><pre><code class="language-php" data-lang="php"><span class="sd">/**
+ * after a search, improve results
+ *
+ * @param ISearchResult $searchResult
+ */</span>
+<span class="k">public</span> <span class="k">function</span> <span class="nf">improveSearchResult</span><span class="p">(</span><span class="nx">ISearchResult</span> <span class="nv">$searchResult</span><span class="p">)</span> <span class="p">{</span>
+	<span class="k">foreach</span> <span class="p">(</span><span class="nv">$searchResult</span><span class="o">-&gt;</span><span class="na">getDocuments</span><span class="p">()</span> <span class="k">as</span> <span class="nv">$document</span><span class="p">)</span> <span class="p">{</span>
+		<span class="k">try</span> <span class="p">{</span>
+			<span class="nv">$board</span> <span class="o">=</span>
+				<span class="nv">$this</span><span class="o">-&gt;</span><span class="na">fullTextSearchService</span><span class="o">-&gt;</span><span class="na">getBoardFromCardId</span><span class="p">((</span><span class="nx">int</span><span class="p">)</span><span class="nv">$document</span><span class="o">-&gt;</span><span class="na">getId</span><span class="p">());</span>
+				
+			<span class="nv">$path</span> <span class="o">=</span> <span class="s1">'#!/board/'</span> <span class="o">.</span> <span class="nv">$board</span><span class="o">-&gt;</span><span class="na">getId</span><span class="p">()</span> <span class="o">.</span> <span class="s1">'//card/'</span> <span class="o">.</span> <span class="nv">$document</span><span class="o">-&gt;</span><span class="na">getId</span><span class="p">();</span>
+			<span class="nv">$document</span><span class="o">-&gt;</span><span class="na">setLink</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">urlGenerator</span><span class="o">-&gt;</span><span class="na">linkToRoute</span><span class="p">(</span><span class="s1">'deck.page.index'</span><span class="p">)</span> <span class="o">.</span> <span class="nv">$path</span><span class="p">);</span>
+		<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">DoesNotExistException</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+		<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">MultipleObjectsReturnedException</span> <span class="nv">$e</span><span class="p">)</span> <span class="p">{</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+<span class="p">}</span></code></pre></figure>
+
+<figure>
+	<img src="/assets/img/fulltextsearch/deck-app-92dd28f1ea0.gif" alt="" />
+	<figcaption><p>Clicking on the displayed result will open the related _Card_.</p></figcaption>
+</figure>
 
 
             </article>
