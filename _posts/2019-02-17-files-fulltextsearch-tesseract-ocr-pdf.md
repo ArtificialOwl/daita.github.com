@@ -88,3 +88,9 @@ Open the file `/etc/ImageMagick-6/policy.html` and modify the `rights` parameter
 
 
 
+## Important Note
+
+The process of converting multiple-pages PDF files into image and convert each image to text is really (**really**) heavy. 
+Enabling this features in the FullTextSearch settings page will drastically slow the indexing of your Nextcloud!
+
+
