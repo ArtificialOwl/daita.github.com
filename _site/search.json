@@ -1,6 +1,14 @@
 [
   
     {
+      "title"    : "Files_FullTextSearch_Tesseract can also OCR your PDF",
+      "category" : "Nextcloud FullTextSearch",
+      "tags"     : "php, nextcloud, fulltextsearch, files, and ocr",
+      "url"      : "/files-fulltextsearch-tesseract-ocr-pdf/",
+      "date"     : "15 Feb 2019"
+    } ,
+  
+    {
       "title"    : "How I implemented FullTextSearch in the Deck app",
       "category" : "Nextcloud FullTextSearch",
       "tags"     : "php, nextcloud, fulltextsearch, and deck",

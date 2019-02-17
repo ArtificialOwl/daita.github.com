@@ -5,9 +5,31 @@
     <description>ArtificialOwl</description>
     <link>https://daita.github.io//</link>
     <atom:link href="https://daita.github.io//feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sat, 16 Feb 2019 10:31:43 -0100</pubDate>
-    <lastBuildDate>Sat, 16 Feb 2019 10:31:43 -0100</lastBuildDate>
+    <pubDate>Sun, 17 Feb 2019 10:23:50 -0100</pubDate>
+    <lastBuildDate>Sun, 17 Feb 2019 10:23:50 -0100</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
+    
+      <item>
+        <title>Files_FullTextSearch_Tesseract can also OCR your PDF</title>
+        <description>&lt;p&gt;&lt;em&gt;this post is a simple presentation of a new feature in the Files_FullTextSearch_Tesseract app.&lt;/em&gt;&lt;/p&gt; &lt;figure&gt; &lt;img src=&quot;/assets/img/fulltextsearch/files-ocr-pdf-58fd3a6fe359.png&quot; alt=&quot;&quot; /&gt; &lt;figcaption&gt;&lt;p&gt;A new feature and a new setting&lt;/p&gt;&lt;/figcaption&gt; &lt;/figure&gt; &lt;h2 id=&quot;pdf-files-and-fulltextsearch&quot;&gt;PDF files and FullTextSearch&lt;/h2&gt; &lt;p&gt;We can compare &lt;strong&gt;PDF&lt;/strong&gt; file to an image file with the ability of storing a text layer. This way, when a PDF is created from a text document (like a &lt;em&gt;print as file&lt;/em&gt;), the original text is saved in the file itself. However, if the source of a PDF is a scanned document there is no text layer, only the image of the scan is stored in the...</description>
+        <pubDate>Fri, 15 Feb 2019 07:57:12 -0100</pubDate>
+        <link>https://daita.github.io//files-fulltextsearch-tesseract-ocr-pdf/</link>
+        <guid isPermaLink="true">https://daita.github.io//files-fulltextsearch-tesseract-ocr-pdf/</guid>
+        
+        <category>php</category>
+        
+        <category>nextcloud</category>
+        
+        <category>fulltextsearch</category>
+        
+        <category>files</category>
+        
+        <category>ocr</category>
+        
+        
+        <category>Nextcloud FullTextSearch</category>
+        
+      </item>
     
       <item>
         <title>How I implemented FullTextSearch in the Deck app</title>

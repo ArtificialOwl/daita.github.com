@@ -3,6 +3,7 @@ layout: post
 title: "How I implemented FullTextSearch in the Deck app"
 image: ''
 date: 2019-02-15 08:57:12
+comments: true
 tags:
 - php
 - nextcloud
@@ -311,7 +312,7 @@ public function improveSearchResult(ISearchResult $searchResult) {
 
 <figure>
 	<img src="{{"/assets/img/fulltextsearch/deck-app-92dd28f1ea0.gif"}}" alt="">
-	<figcaption><p>Clicking on the displayed result will open the related _Card_.</p></figcaption>
+	<figcaption><p>Clicking on the displayed result will open the related Card.</p></figcaption>
 </figure>
 
 
