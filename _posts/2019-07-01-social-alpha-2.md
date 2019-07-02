@@ -23,8 +23,12 @@ _this post is a resume of features currently implemented in alpha2 (0.2.6) and h
 
 This version provide more interactions with posts and better integration with the fediverse.
 
-For example, you can now give visibility to a _Public Post_ by _Boosting_ it to your followers. This works in both, meaning that you will see in your _Timeline_ any post _boosted_ by people you are following.
- 
+### Boost
+
+
+For example, you can now give visibility to a post by **boosting** it to your followers. 
+This works in both ways, meaning that you will see in your _Timeline_ any post **boosted** by people you are following.
+
 
 ### Configuration
 
@@ -51,7 +55,7 @@ RedirectPermanent /.well-known/host-meta http://cloud.example.net/.well-known/ho
 
 **- whitelist / blacklist**
 
-It is now possible to block a list of instances of the fediverse (blacklist), or limit the access to a list of instances (whitelist).
+It is now possible to block a list of instances of the fediverse (blacklist), or limit the access only to a list of instances (whitelist).
 
 To set a blacklist, you need to set the list to **all_but**, and start adding the instances you wish to block:
 {% highlight bash %}
@@ -79,10 +83,10 @@ You can also **list**, **remove** and **reset** the instances from the list.
 
 ### On the way to alpha 2.1
 
-Now, more features are available on the back-end of the app, however we're missing a Vue developer to work on the front-end. 
+Now, more features are available on the back-end of the app, however we're missing a Vue developer to work on the front-end.  
 
-[Juliushaertl](https://github.com/juliushaertl) made most of the current structure, but he have no time left to work on this part of Nextcloud
-[VioloncelloCH](https://github.com/violoncelloCH) integrated some of the last feature, but he does not have enough time this summer to spent on IT project 
+[Juliushaertl](https://github.com/juliushaertl) made most of the current structure, but he have no time left to work on this part of Nextcloud  
+[VioloncelloCH](https://github.com/violoncelloCH) integrated some of the last feature, but he does not have enough time this summer to spent on IT project   
 
 I, personally, consider the Social App as a major step on our way to decentralize Internet; this is the reason **I am asking the community 
 to help us making Nextcloud a better piece of the fediverse**.
