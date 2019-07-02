@@ -15,7 +15,7 @@ categories:
 - Nextcloud Social
 ---
 
-_this post is a resume of features currently implemented in alpha2 (0.2.6) and how you can help us__
+_this post is a resume of features currently implemented in alpha2 (0.2.6) and how you can help us_
 
  
 
@@ -38,7 +38,7 @@ This is a 2-step procedure:
 - Add the following line in your Apache in the configuration file of your website on _example.net_:
 
 {% highlight bash %}
-      RedirectPermanent /.well-known/host-meta http://cloud.example.net/.well-known/host-meta```
+RedirectPermanent /.well-known/host-meta http://cloud.example.net/.well-known/host-meta
 {% endhighlight %}
 
 - Configure the social app using the _./occ_ command:
