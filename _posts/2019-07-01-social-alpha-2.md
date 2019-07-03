@@ -15,7 +15,7 @@ categories:
 - Nextcloud Social
 ---
 
-__
+
 
 I, personally, consider the Social App as a major step on our way to decentralize Internet; this is the reason **I am asking the community 
 to help us making Nextcloud a better piece of the fediverse**. Read on for an overview of the new features currently implemented in alpha2 (0.2.6) and a call for help: let's get Social to a stable release!
@@ -103,7 +103,7 @@ to help us making Nextcloud a better piece of the fediverse**.
 - Making more complex features (upload attachments, displays notification, ...)
 - All the work will be based on the existing Vue framework
 
-Want to help? Set up a [Nextcloud developer environment](https://docs.nextcloud.com/server/16/developer_manual/app/) and [fork the Social app repository!](https://docs.nextcloud.com/server/16/developer_manual/app/) Then you can look at the [to develop-tag](https://github.com/nextcloud/social/issues?q=is%3Aissue+is%3Aopen+label%3A%221.+to+develop%22) or [the enhancements](https://github.com/nextcloud/social/issues?q=is%3Aissue+is%3Aopen+label%3Aenhancement). Do a pull request and I'll be happy to review and help guide it in!
+Want to help? You can [Contact me](mailto:maxence@nextcloud.com) and/or start setting up a [Nextcloud developer environment](https://docs.nextcloud.com/server/16/developer_manual/app/) and [fork the Social app repository!](https://docs.nextcloud.com/server/16/developer_manual/app/) then you can look at the [to develop-tag](https://github.com/nextcloud/social/issues?q=is%3Aissue+is%3Aopen+label%3A%221.+to+develop%22) or [the enhancements](https://github.com/nextcloud/social/issues?q=is%3Aissue+is%3Aopen+label%3Aenhancement). Do a pull request and I'll be happy to review and help guide it in! 
 
 ## Changelog
 
