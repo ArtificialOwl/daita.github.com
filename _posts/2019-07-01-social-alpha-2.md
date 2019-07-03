@@ -15,16 +15,18 @@ categories:
 - Nextcloud Social
 ---
 
-_this post is a resume of features currently implemented in alpha2 (0.2.6) and how you can help us_
+__
 
- 
+I, personally, consider the Social App as a major step on our way to decentralize Internet; this is the reason **I am asking the community 
+to help us making Nextcloud a better piece of the fediverse**. Read on for an overview of the new features currently implemented in alpha2 (0.2.6) and a call for help: let's get Social to a stable release!
+
 
 ## Social alpha 2.0
 
 This version provide more interactions with posts and better integration with the fediverse.
 
-### Boost
 
+### Boost
 
 For example, you can now give visibility to a post by **boosting** it to your followers. 
 This works in both ways, meaning that you will see in your _Timeline_ any post **boosted** by people you are following.
@@ -55,7 +57,7 @@ RedirectPermanent /.well-known/host-meta http://cloud.example.net/.well-known/ho
 
 **- whitelist / blacklist**
 
-It is now possible to block a list of instances of the fediverse (blacklist), or limit the access only to a list of instances (whitelist).
+It is now possible to block a list of instances of the fediverse (blacklist), or limit access only to a list of instances (whitelist).
 
 To set a blacklist, you need to set the list to **all_but**, and start adding the instances you wish to block:
 {% highlight bash %}
@@ -83,31 +85,25 @@ You can also **list**, **remove** and **reset** the instances from the list.
 
 ### On the way to alpha 2.1
 
-Now, more features are available on the back-end of the app, however we're missing a Vue developer to work on the front-end.  
-
-[Juliushaertl](https://github.com/juliushaertl) made most of the current structure, but he have no time left to work on this part of Nextcloud  
-[VioloncelloCH](https://github.com/violoncelloCH) integrated some of the last feature, but he does not have enough time this summer to spent on IT project   
+Now, more features are available on the back-end of the app, however would need Javascript-Vue work to implement the front-end features! Two of the developers who contributed, [Juliushaertl](https://github.com/juliushaertl) who made most of the current structure, and [VioloncelloCH](https://github.com/violoncelloCH) who more recently integrated some of the latest features, haven't had much time lately and won't soon.
 
 I, personally, consider the Social App as a major step on our way to decentralize Internet; this is the reason **I am asking the community 
 to help us making Nextcloud a better piece of the fediverse**.
 
-
 **Who are we looking for:**
 
-- Vue enthusiastic (basic knowledge, does not need to be a master)
-- Basic PHP knowledge would be nice.
+- Vue enthusiastic (basic knowledge, no need to be a master)
+- Basic PHP knowledge would be nice, but we'll make it work
 
 
 **What needs to be done:**
 
 - Few [small] bugs to be fixed on the current front-end
-- Adding new simple features (displays attachments, conversations, ...)
+- Adding new simple features (displays attachments (pictures!!!), conversations, ...)
 - Making more complex features (upload attachments, displays notification, ...)
 - All the work will be based on the existing Vue framework
 
-
-
-
+Want to help? Set up a [Nextcloud developer environment](https://docs.nextcloud.com/server/16/developer_manual/app/) and [fork the Social app repository!](https://docs.nextcloud.com/server/16/developer_manual/app/) Then you can look at the [to develop-tag](https://github.com/nextcloud/social/issues?q=is%3Aissue+is%3Aopen+label%3A%221.+to+develop%22) or [the enhancements](https://github.com/nextcloud/social/issues?q=is%3Aissue+is%3Aopen+label%3Aenhancement). Do a pull request and I'll be happy to review and help guide it in!
 
 ## Changelog
 
