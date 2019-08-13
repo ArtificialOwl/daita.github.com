@@ -15,10 +15,9 @@ categories:
 - Nextcloud FullTextSearch 
 ---
 
-Nextcloud is selling support subscriptions but we also offer our customers our services if they want a new feature to be implemented.  
-Most of the time, when the implementation of the requested feature is done by an external app, the distribution is done using our App Store so the app is useable by everyone.   
+Nextcloud Enterprise customers have access to professional services where we implement features and improvements they need for their use case. When the implementation of the requested feature can be done in an external app, the distribution is often done using our App Store so the app is useable by everyone. Other times, we can implement improvements to existing apps or Nextcloud Server itself and other users benefit from the improvements in a future release.
 
-In our current case, the request was too specific to have a public interest.  
+But there are cases where the request is too specific to have a public interest. In this blog I describe such a case and use it to explain how to extend our fulltextsearch engine with extra metadata.
 
 # The request
 
@@ -33,7 +32,7 @@ The requirement was
 
 # The solution
 
-Even if it is only about few metadata, as the content of the file does not need to be indexed, it became quickly obvious that the cleanest solution that covert all requirements was to write an app that extends the `files_fulltextsearch` app.
+Even if it is only about a small amount of metadata, as the content of the file does not need to be indexed, it became quickly obvious that the cleanest solution that would cover all requirements was to write an app that extends the `files_fulltextsearch` app.
 
 The app would:
 
