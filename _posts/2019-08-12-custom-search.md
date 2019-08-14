@@ -110,15 +110,14 @@ public function onFileIndexing(GenericEvent $e) {
 `FullTextSearch` comes with a set of command line tools to verify how the content is extracted and indexed.   
 These commands require the `fileId` of the test document to index.
 
+In our examples, `fileId=979` and `author=cult`
 
 
 **./occ fulltextsearch:document:provider**
 
 returns the data extracted from the file, using `userId`, `providerId` and `fileId`.
 
->        ./occ fulltextsearch:document:provider <owner> files <fileId>
-
-<pre>
+```json
 $ ./occ fulltextsearch:document:provider cult files 979
 Document:
 {
@@ -133,7 +132,7 @@ Document:
     },
 [...]
 }
-</pre>
+```
 
 
 
@@ -144,20 +143,16 @@ Document:
 
 index a document
 
->        ./occ fulltextsearch:document:index <owner> files <fileId>
-
-<pre>
+```json
 $ ./occ fulltextsearch:document:provider cult files 979
-</pre>
+```
 
 
 **./occ fulltextsearch:document:platform**
 
 returns the indexed data/metadata about a file, using `providerId` and `fileId`
 
->        ./occ fulltextsearch:document:platform files <fileId>
-
-<pre>
+```json
 $ ./occ fulltextsearch:document:platform files 979
 {
     "document": {
@@ -173,8 +168,7 @@ $ ./occ fulltextsearch:document:platform files 979
  [...]   
     }
 }
-</pre>
-
+```
 
 
 
@@ -210,7 +204,7 @@ fullTextSearch.search(request);
 ```
 
 The request is now managed by FullTextSearch that will generate a SearchRequest object. 
-Our app will intercepted that object before being sent to elasticsearch and complete the search with our own options
+Our app will intercept that object before being sent to elasticsearch and complete the search with our own options
 
 
 ### Search by metadata
@@ -302,4 +296,4 @@ public function onSearchRequest(GenericEvent $e) {
 
 Once completed, the object `SearchRequest` will be sent to elasticsearch for search. Results will be displayed by `FullTextSearch` in the Files App.  
 
-Thanks for your interest in our products. If you have any questions, you can contact me on maxence@artificial-owl.com and/or join the community on https://help.nextcloud.com/
+Thanks for your interest in our products. If you have any questions, you can contact me on [maxence@artificial-owl.com](mailto:maxence@artificial-owl.com) and/or join the community on [https://help.nextcloud.com/](https://help.nextcloud,com/)
