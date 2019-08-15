@@ -15,13 +15,13 @@ categories:
 - Nextcloud FullTextSearch 
 ---
 
-Nextcloud Enterprise customers have access to professional services where we implement features and improvements they need for their use case. When the implementation of the requested feature can be done in an external app, the distribution is often done using our App Store so the app is useable by everyone. Other times, we can implement improvements to existing apps or Nextcloud Server itself and other users benefit from the improvements in a future release.
+Nextcloud Enterprise customers have access to Professional Services where we implement features and improvements they need for their use cases. When the implementation of the requested feature can be done in an external app, the distribution is often done using our App Store so the app is useable by everyone. Other times, we can implement improvements to existing apps or Nextcloud Server itself and other users benefit from the improvements in a future general server release.
 
-But there are cases where the request is too specific to have a public interest. In this blog I describe such a case and use it to explain how to extend our fulltextsearch engine with extra metadata.
+But there are cases where the request is too specific to have a public interest. In this blog I describe such a case and use it to explain how we extended our fulltextsearch engine with extra metadata.
 
 # The request
 
-One of our customer is using Nextcloud to store _communications_ between an `author` and a `recipient` at a specific `date and time`. Those metadata were stored in the filename in a format of `'{author}-{recipient}_{datetime}'`.
+One of our customers is using Nextcloud to store _communications_ between an `author` and a `recipient` at a specific `date and time`. Those metadata were stored in the filename in a format of `'{author}-{recipient}_{datetime}'`.
 
 The requirement was 
 
@@ -58,8 +58,8 @@ _Calling the file `js/custom_search.js` from our app when the Files App asks if 
 
 ### The indexing process.
 
-The event `\OCA\Files_FullTextSearch::onFileIndexing` is broadcast each time a file is ready to be indexed: when the file is created, or modified, or shared/unshared.  
-The event contains the current `File` and the `IndexDocument` that will be send to the elasticsearch.
+The event `\OCA\Files_FullTextSearch::onFileIndexing` is broadcasted each time a file is ready to be indexed: when the file is created, modified, or shared/unshared.  
+The event contains the current `File` and the `IndexDocument` that will be sent to the elasticsearch index.
 
 Once catched, we will feed the `IndexDocument` with the extracted metadata from `File`, so the extra metadata will be indexed with the rest of the document. 
 
@@ -204,12 +204,12 @@ fullTextSearch.search(request);
 ```
 
 The request is now managed by FullTextSearch that will generate a SearchRequest object. 
-Our app will intercept that object before being sent to elasticsearch and complete the search with our own options
+Our app will intercept that object before being sent to elasticsearch and complete the search with our own options.
 
 
 ### Search by metadata
 
-Each time a search request on files is initiated, the event `onSearchRequest` is broadcast. 
+Each time a search request on files is initiated, the event `onSearchRequest` is broadcasted.
 
 _catching the event_
 ```php
