@@ -5,14 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Files_FullTextSearch_Tesseract can also OCR your PDF</title>
+    <title>Social alpha 2</title>
 
     <meta name="description" content="">
 
     <!-- Social Twitter -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@AnArtificialOwl">
-    <meta name="twitter:title" content="Files_FullTextSearch_Tesseract can also OCR your PDF">
+    <meta name="twitter:title" content="Social alpha 2">
     <meta name="twitter:description" content="">
 
     
@@ -20,8 +20,8 @@
     
 
     <!-- Social Facebook/Open Graph -->
-    <meta property="og:url" content="https://daita.github.io//files-fulltextsearch-tesseract-ocr-pdf/">
-    <meta property="og:title" content="Files_FullTextSearch_Tesseract can also OCR your PDF">
+    <meta property="og:url" content="https://daita.github.io//social-alpha-2/">
+    <meta property="og:title" content="Social alpha 2">
     
     <meta property="og:image" content="https://daita.github.io/">
     
@@ -29,7 +29,7 @@
     <meta property="og:site_name" content="Maxence Lange - Open Source Free Software Developer">
 
     <!-- Social Google+/Schema.org  -->
-    <meta itemprop="name" content="Files_FullTextSearch_Tesseract can also OCR your PDF"/>
+    <meta itemprop="name" content="Social alpha 2"/>
     <meta itemprop="description" content="">
     <meta itemprop="image" content="https://daita.github.io//assets/img/blog-image.png"/>
 
@@ -59,7 +59,7 @@
     <meta name="theme-color" content="#004d7a">
 
     <link rel="stylesheet" href="/assets/css/main.css">
-    <link rel="canonical" href="https://daita.github.io//files-fulltextsearch-tesseract-ocr-pdf/">
+    <link rel="canonical" href="https://daita.github.io//social-alpha-2/">
     <link rel="alternate" type="application/rss+xml" title="Maxence Lange - Open Source Free Software Developer" href="https://daita.github.io//feed.xml" />
 </head>
 
@@ -91,7 +91,7 @@
     
     <ul>
       <li><span>&nbsp;</span></li>
-      <li><span>/files-fulltextsearch-tesseract-ocr-pdf/</span></li>
+      <li><span>/social-alpha-2/</span></li>
       <li><span>Artificial Owl</span></li>
       <li><span>&nbsp;</span></li>
     </ul>
@@ -271,71 +271,132 @@
         <section class="post" itemscope itemtype="http://schema.org/BlogPosting">
             
                 <div class="time">
-                    <time itemprop="datePublished" datetime="2019-02-15 07:57:12 -0100">15 Feb 2019</time>
+                    <time itemprop="datePublished" datetime="2019-07-01 10:39:17 -0100">01 Jul 2019</time>
                 </div>
             
-            <h1 class="post-title" itemprop="name">Files_FullTextSearch_Tesseract can also OCR your PDF</h1>
+            <h1 class="post-title" itemprop="name">Social alpha 2</h1>
 
             <article role="article" id="scroll" class="post-content" itemprop="articleBody">
-                <p><em>this post is a simple presentation of a new feature in the Files_FullTextSearch_Tesseract app.</em></p>
+                <p>I, personally, consider the Social App as a major step on our way to decentralize Internet; this is the reason <strong>I am asking the community 
+to help us making Nextcloud a better piece of the fediverse</strong>. Read on for an overview of the new features currently implemented in alpha2 (0.2.6) and a call for help: let’s get Social to a stable release!</p>
 
-<figure>
-	<img src="/assets/img/fulltextsearch/files-ocr-pdf-58fd3a6fe359.png" alt="" />
-	<figcaption><p>A new feature and a new setting</p></figcaption>
-</figure>
+<h2 id="social-alpha-20">Social alpha 2.0</h2>
 
-<h2 id="pdf-files-and-fulltextsearch">PDF files and FullTextSearch</h2>
+<p>This version provide more interactions with posts and better integration with the fediverse.</p>
 
-<p>We can compare <strong>PDF</strong> file to an image file with the ability of storing a text layer. 
-This way, when a PDF is created from a text document (like a <em>print as file</em>), the original text is saved in the file itself. 
-However, if the source of a PDF is a scanned document there is no text layer, only the image of the scan is stored in the file.</p>
+<h3 id="boost">Boost</h3>
 
-<p><strong>Elasticsearch</strong> use <strong>Tika</strong> to read PDF files, so when <strong>FullTextSearch</strong> index a PDF file, it just need to send the full content 
-of the file to Elasticsearch that will extract the original text if it is available in the file.</p>
+<p>For example, you can now give visibility to a post by <strong>boosting</strong> it to your followers. 
+This works in both ways, meaning that you will see in your <em>Timeline</em> any post <strong>boosted</strong> by people you are following.</p>
 
-<p><a href="https://www.elastic.co/guide/en/elasticsearch/plugins/current/ingest-attachment.html">Link to Elasticsearch/ingest-attachment</a></p>
+<h3 id="configuration">Configuration</h3>
 
-<h2 id="ocr-with-tesseract">OCR with Tesseract</h2>
+<p><strong>- host-meta</strong></p>
 
-<p>OCR stands for <em>Optical Character Recognition</em>, which is the process of electronic conversion of images of typed, handwritten 
-or printed text into machine-encoded text, whether from a scanned document, a photo of a document, a scene-photo or from 
-subtitle text superimposed on an image.</p>
+<p>Let’s assume that your Nextcloud is hosted on <em>https://cloud.example.net/</em>, so your social account will be <strong>username@cloud.example.net</strong>.<br />
+<em>host-meta</em> allows you to alias your domain to the host of your Nextcloud and have <strong>username@example.net</strong> as your social account.</p>
 
-<p><a href="https://en.wikipedia.org/wiki/Optical_character_recognition">Link to Wikipedia</a></p>
+<p>This is a 2-step procedure:</p>
 
-<p>The <strong>Files_FullTextSearch_Tesseract</strong> app is an extension to the <strong>Files_FullTextSearch</strong> app that use <strong>Tesseract</strong> to OCR your images.</p>
+<ul>
+  <li>Add the following line in your Apache in the configuration file of your website on <em>example.net</em>:</li>
+</ul>
 
-<p><a href="https://github.com/tesseract-ocr/tesseract">Link to github/tesseract</a></p>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash">RedirectPermanent /.well-known/host-meta http://cloud.example.net/.well-known/host-meta</code></pre></figure>
 
-<p>When Files_FullTextSearch indexes a file it generate an object <strong>IndexDocument</strong> and fill it with meta data and content from the file.<br />
-Before sending the IndexDocument to FullTextSearch, it broadcast an event that will be catch by Files_FullTextSearch_Tesseract if installed on the Nextcloud.</p>
+<ul>
+  <li>Configure the social app using the <em>./occ</em> command:</li>
+</ul>
 
-<p>The last version of Files_FullTextSearch_Tesseract (v1.2.2) have a new feature that will OCR content PDF files.<br />
-The process consists in converting each page of the PDF into an image and processing each image to convert the content into numerical text.</p>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># sudo -u www-data ./occ config:app:set --value 'example.net' social social_address</span></code></pre></figure>
 
-<p><a href="https://github.com/daita/files_fulltextsearch_tesseract/blob/51fadf7435a8445272a5159202f6ecdb25d26f5c/lib/Service/TesseractService.php#L208-L243">Link to source</a></p>
+<p><strong>- whitelist / blacklist</strong></p>
 
-<h2 id="install-and-configure-imagemagick">install and configure ImageMagick</h2>
+<p>It is now possible to block a list of instances of the fediverse (blacklist), or limit access only to a list of instances (whitelist).</p>
 
-<p>This feature needs to convert each page of the PDF to an image using ImageMagick. Meaning you need to install ImageMagick for PHP</p>
+<p>To set a blacklist, you need to set the list to <strong>all_but</strong>, and start adding the instances you wish to block:</p>
 
-<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="nv">$ </span><span class="nb">sudo </span>apt-get <span class="nb">install </span>php-imagick</code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># sudo -u www-data ./occ social:fediverse --type all_but </span>
+<span class="c"># sudo -u www-data ./occ social:fediverse add example.com</span>
+<span class="c"># sudo -u www-data ./occ social:fediverse add another-example.com </span></code></pre></figure>
 
-<p>Then, we need to allow ImageMagick to read PDF files. 
-Open the file <code class="highlighter-rouge">/etc/ImageMagick-6/policy.html</code> and modify the <code class="highlighter-rouge">rights</code> parameter for the line about PDF to <code class="highlighter-rouge">read</code>:</p>
+<p>To set a whitelist, you need to set the list to <strong>none_but</strong>:</p>
 
-<figure class="highlight"><pre><code class="language-xml" data-lang="xml"><span class="nt">&lt;policymap&gt;</span>
-[...]
-  <span class="nt">&lt;policy</span> <span class="na">domain=</span><span class="s">"coder"</span> <span class="na">rights=</span><span class="s">"none"</span> <span class="na">pattern=</span><span class="s">"PS"</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;policy</span> <span class="na">domain=</span><span class="s">"coder"</span> <span class="na">rights=</span><span class="s">"none"</span> <span class="na">pattern=</span><span class="s">"EPI"</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;policy</span> <span class="na">domain=</span><span class="s">"coder"</span> <span class="na">rights=</span><span class="s">"read"</span> <span class="na">pattern=</span><span class="s">"PDF"</span> <span class="nt">/&gt;</span>
-  <span class="nt">&lt;policy</span> <span class="na">domain=</span><span class="s">"coder"</span> <span class="na">rights=</span><span class="s">"none"</span> <span class="na">pattern=</span><span class="s">"XPS"</span> <span class="nt">/&gt;</span>
-<span class="nt">&lt;/policymap&gt;</span></code></pre></figure>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># sudo -u www-data ./occ social:fediverse --type none_but </span>
+<span class="c"># sudo -u www-data ./occ social:fediverse add friendly.com</span>
+<span class="c"># sudo -u www-data ./occ social:fediverse add another-good-friend.com </span></code></pre></figure>
 
-<h2 id="important-note">Important Note</h2>
+<p>You can also <strong>list</strong>, <strong>remove</strong> and <strong>reset</strong> the instances from the list.</p>
 
-<p>The process of converting multiple-pages PDF files into image and convert each image to text is really (<strong>really</strong>) heavy. 
-Enabling this features in the FullTextSearch settings page will drastically slow the indexing of your Nextcloud!</p>
+<figure class="highlight"><pre><code class="language-bash" data-lang="bash"><span class="c"># sudo -u www-data ./occ social:fediverse list</span>
+<span class="c"># sudo -u www-data ./occ social:fediverse remove friendly.com</span>
+<span class="c"># sudo -u www-data ./occ social:fediverse reset</span></code></pre></figure>
+
+<h3 id="on-the-way-to-alpha-21">On the way to alpha 2.1</h3>
+
+<p>Now, more features are available on the back-end of the app, however would need Javascript-Vue work to implement the front-end features! Two of the developers who contributed, <a href="https://github.com/juliushaertl">Juliushaertl</a> who made most of the current structure, and <a href="https://github.com/violoncelloCH">VioloncelloCH</a> who more recently integrated some of the latest features, haven’t had much time lately and won’t soon.</p>
+
+<p>I, personally, consider the Social App as a major step on our way to decentralize Internet; this is the reason <strong>I am asking the community 
+to help us making Nextcloud a better piece of the fediverse</strong>.</p>
+
+<p><strong>Who are we looking for:</strong></p>
+
+<ul>
+  <li>Vue enthusiastic (basic knowledge, no need to be a master)</li>
+  <li>Basic PHP knowledge would be nice, but we’ll make it work</li>
+</ul>
+
+<p><strong>What needs to be done:</strong></p>
+
+<ul>
+  <li>Few [small] bugs to be fixed on the current front-end</li>
+  <li>Adding new simple features (displays attachments (pictures!!!), conversations, …)</li>
+  <li>Making more complex features (upload attachments, displays notification, …)</li>
+  <li>All the work will be based on the existing Vue framework</li>
+</ul>
+
+<p>Want to help? You can <a href="mailto:maxence@nextcloud.com">Contact me</a> and/or start setting up a <a href="https://docs.nextcloud.com/server/16/developer_manual/app/">Nextcloud developer environment</a> and <a href="https://docs.nextcloud.com/server/16/developer_manual/app/">fork the Social app repository!</a> then you can look at the <a href="https://github.com/nextcloud/social/issues?q=is%3Aissue+is%3Aopen+label%3A%221.+to+develop%22">to develop-tag</a> or <a href="https://github.com/nextcloud/social/issues?q=is%3Aissue+is%3Aopen+label%3Aenhancement">the enhancements</a>. Do a pull request and I’ll be happy to review and help guide it in!</p>
+
+<h2 id="changelog">Changelog</h2>
+
+<h3 id="features">features:</h3>
+
+<ul>
+  <li>[global] Boosting Post.</li>
+  <li>[global] Delete a Post.</li>
+  <li>[UI] Following an account from an external website.</li>
+  <li>[federated] Async on incoming request.</li>
+  <li>[federated] Caching on incoming request.</li>
+  <li>[federated] Caching incoming attachments.</li>
+  <li>[federated] limit rights and access to/from the fediverse.</li>
+</ul>
+
+<h3 id="enhancements">enhancements:</h3>
+
+<ul>
+  <li>[global] Complete SQL migration.</li>
+  <li>[global] Timeline can now manage multiple type of Stream object.</li>
+  <li>[global] Improving streams.</li>
+  <li>[global] More logs.</li>
+  <li>[UI] Dark theme.</li>
+  <li>[UI] Searching now send only limited request.</li>
+  <li>[federated] Managing local and remote host-meta</li>
+  <li>[federated] Caching context content.</li>
+  <li>[federated] Outgoing request accepts redirection.</li>
+  <li>[federated] Removing an actor should deletes his posts.</li>
+  <li>[setup] The app can now works on local address, with no SSL support.</li>
+  <li>[setup] The app can be installed in custom apps folder.</li>
+</ul>
+
+<h3 id="bugfixes">bugfixes:</h3>
+
+<ul>
+  <li>[UI] public post counter now count only public post.</li>
+  <li>[global] Fixing caching from 3rd party instance</li>
+  <li>[global] Fixing signature check</li>
+  <li>[global] Fixing local and federated timeline</li>
+  <li>[global] More debug logging</li>
+</ul>
 
 
             </article>
@@ -344,17 +405,17 @@ Enabling this features in the FullTextSearch settings page will drastically slow
 
     <h3>Share</h3>
 
-    <a aria-label="Share on Twitter" href="https://twitter.com/intent/tweet?text=&quot;&quot;%20https://daita.github.io//files-fulltextsearch-tesseract-ocr-pdf/%20via%20&#64;AnArtificialOwl&hashtags=php,nextcloud,fulltextsearch,files,ocr,"
+    <a aria-label="Share on Twitter" href="https://twitter.com/intent/tweet?text=&quot;&quot;%20https://daita.github.io//social-alpha-2/%20via%20&#64;AnArtificialOwl&hashtags=php,nextcloud,social,fediverse,Vue,"
     onclick="window.open(this.href, 'twitter-share', 'width=550,height=235');return false;" title="Share on Twitter">
         <svg class="icon icon-twitter"><use xlink:href="#icon-twitter"></use></svg>
     </a>
 
-    <a aria-label="Share on Facebook"href="https://www.facebook.com/sharer/sharer.php?u=https://daita.github.io//files-fulltextsearch-tesseract-ocr-pdf/"
+    <a aria-label="Share on Facebook"href="https://www.facebook.com/sharer/sharer.php?u=https://daita.github.io//social-alpha-2/"
     onclick="window.open(this.href, 'facebook-share','width=580,height=296');return false;" title="Share on Facebook">
         <svg class="icon icon-facebook"><use xlink:href="#icon-facebook"></use></svg>
     </a>
 
-    <a aria-label="Share on Google Plus" href="https://plus.google.com/share?url=https://daita.github.io//files-fulltextsearch-tesseract-ocr-pdf/"
+    <a aria-label="Share on Google Plus" href="https://plus.google.com/share?url=https://daita.github.io//social-alpha-2/"
     onclick="window.open(this.href, 'google-plus-share', 'width=490,height=530');return false;" title="Share on Google+">
         <svg class="icon icon-google-plus"><use xlink:href="#icon-google-plus"></use></svg>
     </a>
@@ -378,7 +439,7 @@ Enabling this features in the FullTextSearch settings page will drastically slow
         disqus_loaded = true;
         var disqus_shortname = 'cult';
         var disqus_title = '';
-        var disqus_url = '/files-fulltextsearch-tesseract-ocr-pdf/';
+        var disqus_url = '/social-alpha-2/';
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
         dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);

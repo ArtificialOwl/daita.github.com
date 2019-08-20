@@ -1,13 +1,77 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Maxence Lange - Open Source Developer</title>
+    <title>Maxence Lange - Open Source Free Software Developer</title>
     <description>ArtificialOwl</description>
     <link>https://daita.github.io//</link>
     <atom:link href="https://daita.github.io//feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Sun, 17 Feb 2019 10:31:11 -0100</pubDate>
-    <lastBuildDate>Sun, 17 Feb 2019 10:31:11 -0100</lastBuildDate>
+    <pubDate>Tue, 20 Aug 2019 00:29:46 -0100</pubDate>
+    <lastBuildDate>Tue, 20 Aug 2019 00:29:46 -0100</lastBuildDate>
     <generator>Jekyll v3.8.5</generator>
+    
+      <item>
+        <title>Social alpha 2.1</title>
+        <description>&lt;p&gt;&lt;strong&gt;Nextcloud Social alpha 2.1&lt;/strong&gt; (v0.2.100) have been released few weeks ago already, but it is still a good idea to have a blogpost on what’s new and better since &lt;a href=&quot;https://daita.github.io/social-alpha-2/&quot;&gt;alpha 2.0&lt;/a&gt; !&lt;/p&gt; &lt;p&gt;This will be a quick review of the Changelog, and some hint on the content of the next alpha release.&lt;/p&gt; &lt;h2 id=&quot;social-alpha-21&quot;&gt;Social alpha 2.1&lt;/h2&gt; &lt;p&gt;First, let me thanks a new community member; since my last post in here about looking for some help from the community to work on the front-end, I have been in contact with &lt;a href=&quot;https://www.github.com/StCyr&quot;&gt;Cyrille Bollu&lt;/a&gt; that implemented a lot of the requested...</description>
+        <pubDate>Mon, 19 Aug 2019 10:17:00 -0100</pubDate>
+        <link>https://daita.github.io//social-alpha-2.1/</link>
+        <guid isPermaLink="true">https://daita.github.io//social-alpha-2.1/</guid>
+        
+        <category>php</category>
+        
+        <category>nextcloud</category>
+        
+        <category>social</category>
+        
+        <category>fediverse</category>
+        
+        
+        <category>Nextcloud Social</category>
+        
+      </item>
+    
+      <item>
+        <title>Customizing Nextcloud FullTextSearch with 17</title>
+        <description>&lt;p&gt;Nextcloud Enterprise customers have access to Professional Services where we implement features and improvements they need for their use cases. When the implementation of the requested feature can be done in an external app, the distribution is often done using our App Store so the app is useable by everyone. Other times, we can implement improvements to existing apps or Nextcloud Server itself and other users benefit from the improvements in a future general server release.&lt;/p&gt; &lt;p&gt;But there are cases where the request is too specific to have a public interest. In this blog I describe such a case and...</description>
+        <pubDate>Fri, 12 Jul 2019 19:28:12 -0100</pubDate>
+        <link>https://daita.github.io//custom-search/</link>
+        <guid isPermaLink="true">https://daita.github.io//custom-search/</guid>
+        
+        <category>php</category>
+        
+        <category>nextcloud</category>
+        
+        <category>fulltextsearch</category>
+        
+        <category>files</category>
+        
+        <category>files_fulltextsearch</category>
+        
+        
+        <category>Nextcloud FullTextSearch</category>
+        
+      </item>
+    
+      <item>
+        <title>Social alpha 2</title>
+        <description>&lt;p&gt;I, personally, consider the Social App as a major step on our way to decentralize Internet; this is the reason &lt;strong&gt;I am asking the community to help us making Nextcloud a better piece of the fediverse&lt;/strong&gt;. Read on for an overview of the new features currently implemented in alpha2 (0.2.6) and a call for help: let’s get Social to a stable release!&lt;/p&gt; &lt;h2 id=&quot;social-alpha-20&quot;&gt;Social alpha 2.0&lt;/h2&gt; &lt;p&gt;This version provide more interactions with posts and better integration with the fediverse.&lt;/p&gt; &lt;h3 id=&quot;boost&quot;&gt;Boost&lt;/h3&gt; &lt;p&gt;For example, you can now give visibility to a post by &lt;strong&gt;boosting&lt;/strong&gt; it to your followers. This works in...</description>
+        <pubDate>Mon, 01 Jul 2019 10:39:17 -0100</pubDate>
+        <link>https://daita.github.io//social-alpha-2/</link>
+        <guid isPermaLink="true">https://daita.github.io//social-alpha-2/</guid>
+        
+        <category>php</category>
+        
+        <category>nextcloud</category>
+        
+        <category>social</category>
+        
+        <category>fediverse</category>
+        
+        <category>Vue</category>
+        
+        
+        <category>Nextcloud Social</category>
+        
+      </item>
     
       <item>
         <title>Files_FullTextSearch_Tesseract can also OCR your PDF</title>

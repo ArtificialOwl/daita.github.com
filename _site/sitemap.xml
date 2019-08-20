@@ -2,6 +2,18 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 	
 	  <url>
+		<loc>https://daita.github.io//social-alpha-2.1/</loc>
+	  </url>
+	
+	  <url>
+		<loc>https://daita.github.io//custom-search/</loc>
+	  </url>
+	
+	  <url>
+		<loc>https://daita.github.io//social-alpha-2/</loc>
+	  </url>
+	
+	  <url>
 		<loc>https://daita.github.io//files-fulltextsearch-tesseract-ocr-pdf/</loc>
 	  </url>
 	

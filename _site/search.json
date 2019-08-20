@@ -1,6 +1,30 @@
 [
   
     {
+      "title"    : "Social alpha 2.1",
+      "category" : "Nextcloud Social",
+      "tags"     : "php, nextcloud, social, and fediverse",
+      "url"      : "/social-alpha-2.1/",
+      "date"     : "19 Aug 2019"
+    } ,
+  
+    {
+      "title"    : "Customizing Nextcloud FullTextSearch with 17",
+      "category" : "Nextcloud FullTextSearch",
+      "tags"     : "php, nextcloud, fulltextsearch, files, and files_fulltextsearch",
+      "url"      : "/custom-search/",
+      "date"     : "12 Jul 2019"
+    } ,
+  
+    {
+      "title"    : "Social alpha 2",
+      "category" : "Nextcloud Social",
+      "tags"     : "php, nextcloud, social, fediverse, and Vue",
+      "url"      : "/social-alpha-2/",
+      "date"     : "01 Jul 2019"
+    } ,
+  
+    {
       "title"    : "Files_FullTextSearch_Tesseract can also OCR your PDF",
       "category" : "Nextcloud FullTextSearch",
       "tags"     : "php, nextcloud, fulltextsearch, files, and ocr",

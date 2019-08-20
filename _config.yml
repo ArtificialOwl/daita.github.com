@@ -1,5 +1,5 @@
 # Site settings
-title: Maxence Lange - Open Source Developer
+title: Maxence Lange - Open Source Free Software Developer
 description: "ArtificialOwl"
 baseurl: "" # for test: remove string '/space-jekyll-template' to ''
 url: "https://daita.github.io/" # for test: remove string 'http://victorvoid.github.io' to '' but in production: 'https://yourusername.githu.io'
