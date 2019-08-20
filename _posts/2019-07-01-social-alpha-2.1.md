@@ -30,55 +30,39 @@ First, let me thanks a new community member; since my last post in here about lo
 
 - [setup] it is now possible to create an account using ./occ
 - [setup] it is now possible to follow an account using ./occ
-
-_This can helps admin to create and manage Social accounts, but the main idea behind those new command is (in the future) to generate multiple instances of Nextcloud to test our implementation of ActivityPub._
-
 - [setup] new command to completely uninstall the app: ./occ social:reset --uninstall 
 
+_This can helps admin to create and manage Social accounts, but the main idea behind those new command is (in the future) to generate multiple instances of Nextcloud to test our implementation of ActivityPub._   
 _Admin can now totally purge their installation of the Nextcloud Social app; removing everything that have been generated in the database. Please note that it does not clean the generated files yet (like cached images)_
 
-### features
-
-_Since we have a new developer, some new features are available on the front-end_
+### Features
 
 - [global] new Timeline: Liked post.
 - [global] like/unlike on Post.
 - [global] displays Attachments (photos)
-
-_you can now like posts, and find them in a specific timeline._
- 
 - [federated] Managing local and remote host-meta
 
+_Since we have a new developer, some new features are available on the front-end: you can now like posts, and find them in a specific timeline._  
 _host-meta is used to alias domain name. It allows you to keep your cloud on **cloud.example.net** while having a Social address like **@user@example.net**_
 
 
 
-### enhancements
+### Enhancements
 
 - [global] better compatibility with Pleroma.
-
-_Now you can follow Social accounts from instances of Pleroma._
-
-
 - [global] better parsing on non-latin hashtags
-
-_Fixing an issue with accents within hashtags._
- 
- 
 - [global] Attachments (Image) should now be displayed.
-- [federated] Caching now generate also a thumb version of remote Image document.
-
-_Displays thumbs from attached pictures, with a link to a full screen display of the original picture._
-
-
-- [federated] better management of the ID generator.
 - [global] Improving and fixing streams.
 - [global] More debug logging
+- [federated] Caching now generate also a thumb version of remote Image document.
+- [federated] better management of the ID generator.
 - [setup] Rewrite of the announce system
 
-_Improving streams, making everything better._
+_Improving streams, making everything better._   
+_You can follow Social accounts from instances of Pleroma and we fixed an issue with accents within hashtags._    
+_Attached pictures to Post are displayed in a gallery, clicking the thumbnail open the original picture in full screen._
 
-### migration
+### Migration
 
 - [setup] fixing an issue with empty boolean field during postgresql migration.
 - [setup] enlarging some database field.
@@ -91,18 +75,13 @@ _Fixing bugs that would appears during installation/upgrade on some setup._
 ### bugfixes
 
 - [global] fixing an issue on exact result during search.
-
-_With the implementation of `host-meta`, search on aliased address were not working properly._
- 
 - [global] Fixing local and federated timeline
-
-_ Local post are not displayed in the Federated timeline._
- 
 - [global] Fixing caching from 3rd party instance.
 - [global] Fixing signature check
 - [federated] fixing an issue with hashtags importation
 
-_Fixing bugs that would appears on specific use-cases._ 
+_Fixing bugs that would appears on specific use-cases._   
+_Local post are not displayed anymore in the Federated timeline._ 
 
 
 

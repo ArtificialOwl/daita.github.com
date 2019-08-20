@@ -290,65 +290,42 @@
 <ul>
   <li>[setup] it is now possible to create an account using ./occ</li>
   <li>[setup] it is now possible to follow an account using ./occ</li>
-</ul>
-
-<p><em>This can helps admin to create and manage Social accounts, but the main idea behind those new command is (in the future) to generate multiple instances of Nextcloud to test our implementation of ActivityPub.</em></p>
-
-<ul>
   <li>[setup] new command to completely uninstall the app: ./occ social:reset –uninstall</li>
 </ul>
 
-<p><em>Admin can now totally purge their installation of the Nextcloud Social app; removing everything that have been generated in the database. Please note that it does not clean the generated files yet (like cached images)</em></p>
+<p><em>This can helps admin to create and manage Social accounts, but the main idea behind those new command is (in the future) to generate multiple instances of Nextcloud to test our implementation of ActivityPub.</em> <br />
+<em>Admin can now totally purge their installation of the Nextcloud Social app; removing everything that have been generated in the database. Please note that it does not clean the generated files yet (like cached images)</em></p>
 
-<h3 id="features">features</h3>
-
-<p><em>Since we have a new developer, some new features are available on the front-end</em></p>
+<h3 id="features">Features</h3>
 
 <ul>
   <li>[global] new Timeline: Liked post.</li>
   <li>[global] like/unlike on Post.</li>
   <li>[global] displays Attachments (photos)</li>
-</ul>
-
-<p><em>you can now like posts, and find them in a specific timeline.</em></p>
-
-<ul>
   <li>[federated] Managing local and remote host-meta</li>
 </ul>
 
-<p><em>host-meta is used to alias domain name. It allows you to keep your cloud on <strong>cloud.example.net</strong> while having a Social address like <strong>@user@example.net</strong></em></p>
+<p><em>Since we have a new developer, some new features are available on the front-end: you can now like posts, and find them in a specific timeline.</em><br />
+<em>host-meta is used to alias domain name. It allows you to keep your cloud on <strong>cloud.example.net</strong> while having a Social address like <strong>@user@example.net</strong></em></p>
 
-<h3 id="enhancements">enhancements</h3>
+<h3 id="enhancements">Enhancements</h3>
 
 <ul>
   <li>[global] better compatibility with Pleroma.</li>
-</ul>
-
-<p><em>Now you can follow Social accounts from instances of Pleroma.</em></p>
-
-<ul>
   <li>[global] better parsing on non-latin hashtags</li>
-</ul>
-
-<p><em>Fixing an issue with accents within hashtags.</em></p>
-
-<ul>
   <li>[global] Attachments (Image) should now be displayed.</li>
-  <li>[federated] Caching now generate also a thumb version of remote Image document.</li>
-</ul>
-
-<p><em>Displays thumbs from attached pictures, with a link to a full screen display of the original picture.</em></p>
-
-<ul>
-  <li>[federated] better management of the ID generator.</li>
   <li>[global] Improving and fixing streams.</li>
   <li>[global] More debug logging</li>
+  <li>[federated] Caching now generate also a thumb version of remote Image document.</li>
+  <li>[federated] better management of the ID generator.</li>
   <li>[setup] Rewrite of the announce system</li>
 </ul>
 
-<p><em>Improving streams, making everything better.</em></p>
+<p><em>Improving streams, making everything better.</em> <br />
+<em>You can follow Social accounts from instances of Pleroma and we fixed an issue with accents within hashtags.</em>  <br />
+<em>Attached pictures to Post are displayed in a gallery, clicking the thumbnail open the original picture in full screen.</em></p>
 
-<h3 id="migration">migration</h3>
+<h3 id="migration">Migration</h3>
 
 <ul>
   <li>[setup] fixing an issue with empty boolean field during postgresql migration.</li>
@@ -362,23 +339,14 @@
 
 <ul>
   <li>[global] fixing an issue on exact result during search.</li>
-</ul>
-
-<p><em>With the implementation of <code class="highlighter-rouge">host-meta</code>, search on aliased address were not working properly.</em></p>
-
-<ul>
   <li>[global] Fixing local and federated timeline</li>
-</ul>
-
-<p>_ Local post are not displayed in the Federated timeline._</p>
-
-<ul>
   <li>[global] Fixing caching from 3rd party instance.</li>
   <li>[global] Fixing signature check</li>
   <li>[federated] fixing an issue with hashtags importation</li>
 </ul>
 
-<p><em>Fixing bugs that would appears on specific use-cases.</em></p>
+<p><em>Fixing bugs that would appears on specific use-cases.</em> <br />
+<em>Local post are not displayed anymore in the Federated timeline.</em></p>
 
 <h1 id="roadmap">Roadmap</h1>
 
