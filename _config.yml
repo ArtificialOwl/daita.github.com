@@ -59,15 +59,22 @@ links:
 
 # projects in header index
 projects:
+  - name: Nextcloud Push
+    url: https://github.com/nextcloud/push
+    wip: true
   - name: Nextcloud Social
     url: https://github.com/nextcloud/social
     wip: true
+  - name: Nextcloud Backup
+    url: https://github.com/nextcloud/backup/pull/17
+    wip: true
+  - name: Entities Manager
+    url: https://github.com/nextcloud/server/pull/15357
+    wip: true
   - name: Nextcloud Full Text Search
     url: https://github.com/nextcloud/fulltextsearch
-    wip: true
   - name: Nextcloud Circles
     url: https://github.com/nextcloud/circles
-    wip: true
   - name: Files From Mail
     url: https://github.com/daita/files_frommail
 
