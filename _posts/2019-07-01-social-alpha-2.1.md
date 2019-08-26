@@ -89,7 +89,7 @@ _Local post are not displayed anymore in the Federated timeline._
 
 Non exhaustive list of what should come in the next major release (Alpha 2.2):
 
-- [nc18] implementing Push, using [polling](https://www.github.com/daita/stratos)
+- [nc18] implementing [Push](https://www.github.com/nextcloud/push)
 - [global] creating post with attached documents.
 - [global] new Notifications timeline.
 
