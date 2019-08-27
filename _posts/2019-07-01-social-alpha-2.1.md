@@ -15,14 +15,16 @@ categories:
 ---
 
 
-**Nextcloud Social alpha 2.1** (v0.2.100) have been released few weeks ago already, but it is still a good idea to have a blogpost on what's new and better since [alpha 2.0](https://daita.github.io/social-alpha-2/) !
+**Nextcloud Social alpha 2.1** (v0.2.100) was released some weeks ago already, but it is still a good idea to have a blogpost on what's new and better since [alpha 2.0](https://daita.github.io/social-alpha-2/) !
 
-This will be a quick review of the Changelog, and some hint on the content of the next alpha release.
+For those new to Nextcloud Social, it is a decentralized, federated replacement for well known social networks which are controled by single entities like Facebook, Twitter or Weibo. It is part of the Fediverse, connecting to thousands of servers that run Mastodon or other, compatible solutions. Learn more [in the announcement blog!](https://nextcloud.com/blog/nextcloud-introduces-social-features-joins-the-fediverse/)
+
+This will be a quick review of the Changelog betrween alpha 2.0 and 2.1, and some hints to the content of the next alpha release.
 
 
 ## Social alpha 2.1
 
-First, let me thanks a new community member; since my last post in here about looking for some help from the community to work on the front-end, I have been in contact with [Cyrille Bollu](https://www.github.com/StCyr) that implemented a lot of the requested features !
+First, let me thank a new community member; since my last post in here about looking for some help from the community to work on the front-end, I have been in contact with [Cyrille Bollu](https://www.github.com/StCyr) who got active and implemented a lot of the requested features ! So let's talk about what is new and improved.
 
 
 
@@ -32,7 +34,7 @@ First, let me thanks a new community member; since my last post in here about lo
 - [setup] it is now possible to follow an account using ./occ
 - [setup] new command to completely uninstall the app: ./occ social:reset --uninstall 
 
-_This can helps admin to create and manage Social accounts, but the main idea behind those new command is (in the future) to generate multiple instances of Nextcloud to test our implementation of ActivityPub._   
+_This can help admin to create and manage Social accounts, but the main idea behind those new commands is (in the future) to generate multiple instances of Nextcloud to test our implementation of ActivityPub._   
 _Admin can now totally purge their installation of the Nextcloud Social app; removing everything that have been generated in the database. Please note that it does not clean the generated files yet (like cached images)_
 
 ### Features
@@ -95,6 +97,6 @@ Non exhaustive list of what should come in the next major release (Alpha 2.2):
 
 
 Of course, more people involved will result in a better product and faster improvement !  
-If you want to participate to the development of the Nextcloud Social app, or even to the documentation, you can [contact me](mailto:maxence@artificial-owl.com) or directly start a Pull Request on [our repository](https://www.github.com/nextcloud/social).
+If you want to participate in the development of the Nextcloud Social app, or even to the documentation, you can [contact me](mailto:maxence@artificial-owl.com) or directly start a Pull Request on [our repository](https://www.github.com/nextcloud/social). That is also where you can find documentation on [how to get started in development !](https://github.com/nextcloud/social#development-setup)
 
 
